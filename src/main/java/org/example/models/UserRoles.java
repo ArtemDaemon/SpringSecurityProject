@@ -2,6 +2,9 @@ package org.example.models;
 
 import javax.persistence.*;
 
+/**
+ * Entity representing a user's role.
+ */
 @Entity
 @Table(name = "user_roles")
 public class UserRoles {

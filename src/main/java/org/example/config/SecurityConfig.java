@@ -22,10 +22,12 @@ public class SecurityConfig {
     private UserDetailsService userDetailsService;
 
     /**
-     * Method for setting up a filter chain
-     * @param httpSecurity
-     * @return Customized filter chain
-     * @throws Exception
+     * Configures the security filter chain, setting up authorization rules, login and logout configurations,
+     * and CSRF protection.
+     *
+     * @param httpSecurity the {@link HttpSecurity} to modify
+     * @return the configured {@link SecurityFilterChain}
+     * @throws Exception if an error occurs while configuring the security filter chain
      */
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
@@ -55,8 +57,9 @@ public class SecurityConfig {
     }
 
     /**
-     * Method to get a password encoder
-     * @return Password encoder
+     * Provides a {@link PasswordEncoder} bean that uses BCrypt hashing algorithm.
+     *
+     * @return the {@link PasswordEncoder} bean
      */
     @Bean
     public PasswordEncoder passwordEncoder() {

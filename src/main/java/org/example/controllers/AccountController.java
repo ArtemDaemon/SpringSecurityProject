@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 /**
- * Controller for login/out and signup forms
+ * Controller for handling login, logout, and signup forms.
  */
 @Controller
 public class AccountController {
@@ -18,8 +18,9 @@ public class AccountController {
     UsersService usersService;
 
     /**
-     * Method to get login view
-     * @return Name of login view
+     * Displays the login form.
+     *
+     * @return the name of the login view
      */
     @GetMapping("/login")
     public String loginForm() {
@@ -27,8 +28,9 @@ public class AccountController {
     }
 
     /**
-     * Method for redirecting when logout
-     * @return Path to redirect
+     * Handles the logout process by redirecting to the login page.
+     *
+     * @return the redirect path to the login view
      */
     @PostMapping("/logout")
     public String logout() {
@@ -36,8 +38,9 @@ public class AccountController {
     }
 
     /**
-     * Method to get signup view
-     * @return Name of signup view
+     * Displays the signup form.
+     *
+     * @return the name of the signup view
      */
     @GetMapping("/signup")
     public String signupForm() {
@@ -45,11 +48,13 @@ public class AccountController {
     }
 
     /**
-     * Method to processing signup form
-     * @param username
-     * @param password
-     * @param model MVC model
-     * @return Path to redirect or name of signup view
+     * Processes the signup form, creating a new user if the username is not already taken.
+     * Adds an error message to the model if the username or password is empty, or if the username is already taken.
+     *
+     * @param username the username entered by the user
+     * @param password the password entered by the user
+     * @param model    the MVC model
+     * @return the redirect path to the login view if successful, or the name of the signup view if there is an error
      */
     @PostMapping("/signup")
     public String signup(@RequestParam(name="username", required = true) String username, @RequestParam(name = "password", required = true) String password, Model model) {

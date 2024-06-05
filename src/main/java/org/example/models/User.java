@@ -9,6 +9,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Set;
 
+/**
+ * Entity representing a user, implementing Spring Security's UserDetails interface.
+ */
 @Entity
 @Table(name = "users")
 public class User implements UserDetails {
@@ -21,8 +24,17 @@ public class User implements UserDetails {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private Set<UserRoles> roles;
 
+    /**
+     * Default constructor.
+     */
     public User() {}
 
+    /**
+     * Constructs a new User with the specified username and password.
+     *
+     * @param username the username
+     * @param password the password
+     */
     public User(String username, String password) {
         this.username = username;
         this.password = password;
@@ -57,10 +69,20 @@ public class User implements UserDetails {
         return "User #" + id + " " + username;
     }
 
+    /**
+     * Checks if the user has an admin role.
+     *
+     * @return true if the user has an admin role, false otherwise
+     */
     public boolean isAdmin() {
         return this.roles.stream().anyMatch(r -> r.getAccessLevel() == 1);
     }
 
+    /**
+     * Gets the authorities granted to the user.
+     *
+     * @return the authorities
+     */
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         ArrayList<GrantedAuthority> grantedAuthorities = new ArrayList<GrantedAuthority>();
@@ -69,21 +91,41 @@ public class User implements UserDetails {
         return grantedAuthorities;
     }
 
+    /**
+     * Indicates whether the user's account has expired.
+     *
+     * @return true if the user's account is valid (i.e., non-expired), false otherwise
+     */
     @Override
     public boolean isAccountNonExpired() {
         return true;
     }
 
+    /**
+     * Indicates whether the user is locked or unlocked.
+     *
+     * @return true if the user is not locked, false otherwise
+     */
     @Override
     public boolean isAccountNonLocked() {
         return true;
     }
 
+    /**
+     * Indicates whether the user's credentials (password) has expired.
+     *
+     * @return true if the user's credentials are valid (i.e., non-expired), false otherwise
+     */
     @Override
     public boolean isCredentialsNonExpired() {
         return true;
     }
 
+    /**
+     * Indicates whether the user is enabled or disabled.
+     *
+     * @return true if the user is enabled, false otherwise
+     */
     @Override
     public boolean isEnabled() {
         return true;
