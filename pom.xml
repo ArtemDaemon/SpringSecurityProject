@@ -86,7 +86,7 @@
           </descriptorRefs>
           <archive>
             <manifest>
-              <mainClass>com.example.App</mainClass>
+              <mainClass>org.example.App</mainClass>
             </manifest>
           </archive>
         </configuration>
